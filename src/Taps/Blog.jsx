@@ -8,7 +8,8 @@ const posts = [
 export const Blog = () => {
   return (
     <section id="blog" style={{padding: '3rem 1rem', maxWidth: 900}}>
-      <h2>From the Studio</h2>
+        <h2>Blog</h2>
+      <h3>From the Studio</h3>
       <p style={{color: 'var(--muted, #ccc)'}}>Insights on design, branding, and product.</p>
 
       <ul>

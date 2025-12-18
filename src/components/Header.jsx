@@ -2,13 +2,14 @@ import React from 'react'
 
 export const Header = ({ active = 'home', onNavigate = () => {} }) => {
   const handleClick = (tab) => {
-    if (tab === 'all') {
-      onNavigate('all')
+    // Clicking Home should always go to the landing home view
+    if (tab === 'home') {
+      onNavigate('home')
       return
     }
 
-    // If the landing (all) is active, scroll to the section on the same page
-    if (active === 'all') {
+    // If the landing (home) is active, scroll to the section on the same page
+    if (active === 'home') {
       const el = document.getElementById(tab)
       if (el) {
         el.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -39,9 +40,10 @@ export const Header = ({ active = 'home', onNavigate = () => {} }) => {
   return (
     <header className="site-header">
       <nav style={{ padding: '1rem', display: 'flex', gap: 6 }}>
+        {/* {btn('all', 'All')} */}
         {btn('home', 'Home')}
-        {btn('about', 'About Us')}
-        {btn('brand', 'Brand Management')}
+        {btn('about', 'About ')}
+        {btn('brand', 'Brand')}
         {btn('blog', 'Blog')}
         {btn('studio', 'Studio')}
         {btn('contact', 'Contact Us')}

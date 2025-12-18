@@ -12,7 +12,7 @@ import { Root } from './components/Root'
 import { ContactUs } from './Taps/ContactUs'
 
 function App() {
-  const [active, setActive] = useState('all')
+  const [active, setActive] = useState('home')
 
   return (
     <>
