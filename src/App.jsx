@@ -1,33 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
+import React, { useState } from 'react'
+import { Footer } from './components/Footer'
+import { Header } from './components/Header'
+import { AboutUs } from './Taps/AboutUs'
+import { Blog } from './Taps/Blog'
+import { BrandManagement } from './Taps/BrandManagement'
+import { Home } from './Taps/Home'
+import { Studio } from './Taps/Studio'
+import { Root } from './components/Root'
+import { ContactUs } from './Taps/ContactUs'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [active, setActive] = useState('all')
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <Header active={active} onNavigate={setActive} />
+
+      <div className="page">
+        {active === 'home' && <Root />}
+        {active === 'about' && <AboutUs />}
+        {active === 'brand' && <BrandManagement />}
+        {active === 'blog' && <Blog />}
+        {active === 'studio' && <Studio />}
+        {active === 'contact' && <ContactUs />}
       </div>
-      <h1>Mediamatic Studio</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <Footer />
     </>
   )
 }
