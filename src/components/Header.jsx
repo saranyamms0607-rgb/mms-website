@@ -1,65 +1,108 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from "react";
+import logo from "../assets/mediamatic-logo.png";
 
-export const Header = ({ active = 'home', onNavigate = () => {} }) => {
+export const Header = ({ active = "home", onNavigate = () => {} }) => {
+  const [open, setOpen] = useState(false);
+  const navRef = useRef(null);
+  const hamburgerRef = useRef(null);
+
   const handleClick = (tab) => {
-    // Clicking Home always navigates to the landing and scrolls to top
-    if (tab === 'home') {
-      onNavigate('home')
-      setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 60)
-      return
+    setOpen(false);
+
+    if (tab === "home") {
+      onNavigate("home");
+      setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 60);
+      return;
     }
 
-    // If the landing (home) is active, scroll to the section on the same page
-    if (active === 'home') {
-      const el = document.getElementById(tab)
+    if (active === "home") {
+      const el = document.getElementById(tab);
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        return
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
       }
     }
 
-    // If landing is not active, first switch back to landing then scroll
-    if (active !== 'home') {
-      onNavigate('home')
-      // wait for landing to render then scroll
+    if (active !== "home") {
+      onNavigate("home");
       setTimeout(() => {
-        const el = document.getElementById(tab)
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }, 80)
-      return
+        const el = document.getElementById(tab);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 80);
     }
+  };
 
-    // Fallback: switch to the single-tab view
-    onNavigate(tab)
-  }
+  // Close mobile menu on outside click
+  useEffect(() => {
+    const close = (e) => {
+      if (
+        open && 
+        navRef.current && 
+        hamburgerRef.current &&
+        !navRef.current.contains(e.target) &&
+        !hamburgerRef.current.contains(e.target)
+      ) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, [open]);
 
-  const btn = (tab, label) => (
-    <button
-      onClick={() => handleClick(tab)}
-      style={{
-        marginRight: 12,
-        background: 'transparent',
-        border: 'none',
-        color: 'inherit',
-        cursor: 'pointer',
-        fontWeight: active === tab ? 700 : 500,
-      }}
-    >
-      {label}
-    </button>
-  )
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [open]);
 
   return (
     <header className="site-header">
-      <nav style={{ padding: '1rem', display: 'flex', gap: 6 }}>
-        {/* {btn('all', 'All')} */}
-        {btn('home', 'Home')}
-        {btn('about', 'About ')}
-        {btn('brand', 'Brand')}
-        {btn('blog', 'Blog')}
-        {btn('studio', 'Studio')}
-        {btn('contact', 'Contact Us')}
-      </nav>
+      <div className="header-inner">
+        {/* LOGO */}
+        <div className="logo-wrap" onClick={() => handleClick("home")}>
+          <img src={logo} alt="MediaMatic Studio" />
+        </div>
+
+        {/* NAV */}
+        <nav ref={navRef} className={`nav ${open ? "open" : ""}`}>
+          {[
+            ["home", "Home"],
+            ["about", "About"],
+            ["brand", "Brand"],
+            ["blog", "Blog"],
+            ["studio", "Studio"],
+            ["contact", "Contact"],
+          ].map(([tab, label]) => (
+            <button
+              key={tab}
+              className={`nav-btn ${active === tab ? "active" : ""}`}
+              onClick={() => handleClick(tab)}
+            >
+              {label}
+            </button>
+          ))}
+        </nav>
+
+        {/* HAMBURGER */}
+        <button
+          ref={hamburgerRef}
+          className={`hamburger ${open ? "open" : ""}`}
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle navigation"
+          aria-expanded={open}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+      </div>
     </header>
-  )
-}
+  );
+};

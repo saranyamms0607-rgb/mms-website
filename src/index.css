@@ -4,8 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: rgb(83, 19, 27); /* Changed to burgundy color */
+  background-color: #ffe7a9; /* Light gold background */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,21 +15,15 @@
 
 html {
   scroll-behavior: smooth;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  background-color: #ffe7a9;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #ffe7a9 !important;
+  color: rgb(83, 19, 27); /* Ensure body text is burgundy */
 }
 
 /* Page container to keep content aligned and centered */
@@ -38,6 +32,12 @@ body {
   width: 100%;
   margin: 0 auto;
   padding: 1rem;
+  background-color: transparent;
+  color: rgb(83, 19, 27);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: rgb(83, 19, 27); /* All headings in burgundy */
 }
 
 h1 {
@@ -52,49 +52,112 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: rgb(83, 19, 27); /* Burgundy background */
+  color: #ffe7a9; /* Gold text on buttons */
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.25s ease;
 }
 button:hover {
-  border-color: #646cff;
+  background-color: rgba(83, 19, 27, 0.9);
+  border-color: rgb(83, 19, 27);
+  transform: translateY(-2px);
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto rgba(83, 19, 27, 0.5);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* Links in burgundy color */
+a {
+  font-weight: 500;
+  color: rgb(83, 19, 27);
+  text-decoration: inherit;
+}
+a:hover {
+  color: rgba(83, 19, 27, 0.8);
 }
 
-/* Sticky header */
+/* Remove the old header styles */
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  width: 100%;
-  /* background-color: rgba(36,36,36,0.92); */
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-}
-.site-header nav {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
+  background: linear-gradient(
+    135deg,
+    rgba(83, 19, 27, 0.95),
+    rgba(83, 19, 27, 0.98)
+  ) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 231, 169, 0.12) !important;
+  position: fixed !important;
+  top: 12px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: calc(100% - 24px) !important;
+  max-width: 1200px !important;
+  border-radius: 36px !important;
 }
 
 /* Avoid sections being hidden under the sticky header when scrolled into view */
 section {
-  scroll-margin-top: 88px;
+  scroll-margin-top: 100px;
+}
+
+/* Ensure all main content areas have burgundy text */
+#root {
+  background-color: #ffe7a9;
+  min-height: 100vh;
+  color: rgb(83, 19, 27);
+}
+
+/* Section styling */
+#home, #about, #brand, #blog, #studio, #contact {
+  background-color: transparent;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  color: rgb(83, 19, 27);
+}
+
+/* Update color scheme for better readability */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: rgb(83, 19, 27);
+    background-color: #ffe7a9;
+  }
+  a:hover {
+    color: rgba(83, 19, 27, 0.8);
+  }
+  button {
+    background-color: rgb(83, 19, 27);
+    color: #ffe7a9;
+  }
+}
+
+/* Ensure any other potential background overrides */
+* {
+  box-sizing: border-box;
+}
+
+/* Optional: Add a subtle texture or pattern */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(83, 19, 27, 0.03) 0%, transparent 55%),
+    radial-gradient(circle at 75% 75%, rgba(255, 231, 169, 0.05) 0%, transparent 55%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Form elements styling */
+input, textarea, select {
+  color: rgb(83, 19, 27);
+  border-color: rgba(83, 19, 27, 0.3);
+  background-color: rgba(255, 231, 169, 0.7);
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: rgb(83, 19, 27);
+  outline-color: rgb(83, 19, 27);
 }

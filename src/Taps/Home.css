@@ -1,0 +1,50 @@
+:root {
+  --bg: #ffe7a9;
+  --text: #641721ff;
+  --accent: #ff8709;
+}
+
+.hero {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  padding-left: 4rem;
+}
+
+/* Logo */
+.logo-wrap {
+  flex-shrink: 0;
+}
+
+/* Content */
+.hero-inner {
+  max-width: 720px;
+  padding-right: 20vw;
+}
+
+.hero-title {
+  font-size: 4.5rem;
+  font-weight: 800;
+  line-height: 0.95;
+  margin-bottom: 1.5rem;
+}
+
+.brand {
+  display: block;
+  opacity: 0.95;
+}
+
+.tagline {
+  display: block;
+  color: var(--accent);
+}
+
+.hero-desc {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  opacity: 0.85;
+  max-width: 520px;
+}

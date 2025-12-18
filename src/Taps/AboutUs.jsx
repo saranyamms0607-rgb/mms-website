@@ -4,7 +4,7 @@ export const AboutUs = () => {
   return (
     <section id="about" style={{padding: '3rem 1rem', maxWidth: 800}}>
       <h2>About MMS</h2>
-      <p style={{color: 'var(--muted, #ccc)'}}>
+      <p style={{color: 'var(--muted, rgb(83, 19, 27)'}}>
         MMS is a creative studio focused on brand strategy, design, and
         digital products. We partner with startups and established companies to
         shape identity and deliver measurable results.
