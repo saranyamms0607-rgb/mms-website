@@ -9,10 +9,46 @@ export const Studio = () => {
         deliver end-to-end product experiences.
       </p>
 
-      <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12, marginTop: 12}}>
-        <div style={{background: '#1a1a1a', padding: 12, borderRadius: 8}}>Project: Mobile App Redesign</div>
-        <div style={{background: '#1a1a1a', padding: 12, borderRadius: 8}}>Project: Visual Identity</div>
-        <div style={{background: '#1a1a1a', padding: 12, borderRadius: 8}}>Project: Campaign</div>
+      <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginTop: 12}}>
+        <div style={{
+          background: 'var(--bg)',
+          color: 'var(--text)',
+          padding: 16,
+          borderRadius: 12,
+          boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+          border: '1px solid rgba(255,255,255,0.1)',
+          transition: 'transform 0.2s, box-shadow 0.2s',
+          cursor: 'pointer'
+        }}
+        onMouseEnter={(e) => e.target.style.transform = 'translateY(-4px)'}
+        onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+        >Project: Mobile App Redesign</div>
+        <div style={{
+          background: 'var(--bg)',
+          color: 'var(--text)',
+          padding: 16,
+          borderRadius: 12,
+          boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+          border: '1px solid rgba(255,255,255,0.1)',
+          transition: 'transform 0.2s, box-shadow 0.2s',
+          cursor: 'pointer'
+        }}
+        onMouseEnter={(e) => e.target.style.transform = 'translateY(-4px)'}
+        onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+        >Project: Visual Identity</div>
+        <div style={{
+          background: 'var(--bg)',
+          color: 'var(--text)',
+          padding: 16,
+          borderRadius: 12,
+          boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+          border: '1px solid rgba(255,255,255,0.1)',
+          transition: 'transform 0.2s, box-shadow 0.2s',
+          cursor: 'pointer'
+        }}
+        onMouseEnter={(e) => e.target.style.transform = 'translateY(-4px)'}
+        onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+        >Project: Campaign</div>
       </div>
     </section>
   )
