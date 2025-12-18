@@ -2,9 +2,10 @@ import React from 'react'
 
 export const Header = ({ active = 'home', onNavigate = () => {} }) => {
   const handleClick = (tab) => {
-    // Clicking Home should always go to the landing home view
+    // Clicking Home always navigates to the landing and scrolls to top
     if (tab === 'home') {
       onNavigate('home')
+      setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 60)
       return
     }
 
@@ -17,7 +18,18 @@ export const Header = ({ active = 'home', onNavigate = () => {} }) => {
       }
     }
 
-    // Otherwise switch to the single-tab view
+    // If landing is not active, first switch back to landing then scroll
+    if (active !== 'home') {
+      onNavigate('home')
+      // wait for landing to render then scroll
+      setTimeout(() => {
+        const el = document.getElementById(tab)
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 80)
+      return
+    }
+
+    // Fallback: switch to the single-tab view
     onNavigate(tab)
   }
 
