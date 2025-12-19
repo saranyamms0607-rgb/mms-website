@@ -30,7 +30,7 @@ body {
   margin: 0;
   color: rgb(83, 19, 27);
   background-color: #ffe7a9;
-  min-width:80%;
+  /* min-width:80%; */
   min-height: 100vh;
 }
 
@@ -39,7 +39,8 @@ body {
   max-width: 110;
   width: 100%;
   margin: 0 auto;
-  /* padding: 20px ; */
+  padding: 20px ;
+  background-color:#ffe7a9 ;
 }
 
 h1 {
