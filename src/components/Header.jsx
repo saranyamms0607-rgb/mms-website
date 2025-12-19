@@ -11,25 +11,39 @@ export const Header = ({ active = "home", onNavigate = () => {} }) => {
 
     if (tab === "home") {
       onNavigate("home");
+      // ensure we scroll to top when navigating to home
       setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 60);
       return;
     }
 
+    const scrollToId = (id) => {
+      const el = document.getElementById(id);
+      if (!el) return false;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      return true;
+    };
+
+    // If already on home, try to scroll immediately; if element isn't mounted yet, poll briefly
     if (active === "home") {
-      const el = document.getElementById(tab);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-        return;
+      if (!scrollToId(tab)) {
+        let tries = 0;
+        const maxTries = 20;
+        const iv = setInterval(() => {
+          tries += 1;
+          if (scrollToId(tab) || tries >= maxTries) clearInterval(iv);
+        }, 50);
       }
+      return;
     }
 
-    if (active !== "home") {
-      onNavigate("home");
-      setTimeout(() => {
-        const el = document.getElementById(tab);
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 80);
-    }
+    // If not on home, navigate to home then poll for the target element to appear and scroll
+    onNavigate("home");
+    let tries = 0;
+    const maxTries = 60; // ~3s
+    const iv = setInterval(() => {
+      tries += 1;
+      if (scrollToId(tab) || tries >= maxTries) clearInterval(iv);
+    }, 50);
   };
 
   // Close mobile menu on outside click

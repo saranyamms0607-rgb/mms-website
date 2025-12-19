@@ -1,82 +1,81 @@
+/* =========================
+   FOOTER
+========================= */
 .footer {
-  width: 100%;
-  padding: 2.5rem 3rem;
   background: rgb(83, 19, 27);
-  color: #dcdcf0;
+  color: #ffe7a9;
+  padding: clamp(40px, 6vw, 70px)
+           clamp(20px, 6vw, 80px);
   display: flex;
-  justify-content: space-between; /* LEFT + RIGHT */
-  align-items: flex-start;
-  gap: 2rem;
-  box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.05);
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
 }
 
-/* LEFT ICONS */
+/* =========================
+   SOCIAL ICONS
+========================= */
 .footer-social {
   display: flex;
-  gap: 1rem;
+  gap: 16px;
 }
 
 .footer-social a {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 231, 169, 0.15);
+  color: #ffe7a9;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  font-size: 18px;
   transition: all 0.3s ease;
 }
 
 .footer-social a:hover {
-  background:  rgb(83, 19, 27);
-  border-color:  #ffe7a9;
+  background: #ffe7a9;
+  color: rgb(83, 19, 27);
   transform: translateY(-3px);
 }
 
-/* RIGHT CONTENT */
+/* =========================
+   FOOTER CONTENT
+========================= */
 .footer-content {
-  max-width: 420px;
-  text-align: right;
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+  width: 100%;
 }
 
 .footer-block h4 {
-  font-size: 0.85rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color:  #ffe7a9;
-  margin-bottom: 0.3rem;
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #ffe7a9;
 }
 
 .footer-block p {
-  font-size: 0.9rem;
+  font-size: 14px;
   line-height: 1.6;
-  color:  #ffe7a9;
+  margin: 4px 0;
 }
 
-.footer a {
-  color:  #ffe7a9;
+.footer-block a {
+  color: #ffe7a9;
   text-decoration: none;
 }
 
-/* 📱 MOBILE */
-@media (max-width: 768px) {
+.footer-block a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 767px) {
   .footer {
     flex-direction: column;
-    align-items: center;
-    padding: 2rem 1.5rem;
-  }
-
-  .footer-social {
-    margin-bottom: 1.5rem;
-  }
-
-  .footer-content {
-    text-align: center;
-    align-items: center;
-    max-width: 100%;
+    align-items: flex-start;
   }
 }

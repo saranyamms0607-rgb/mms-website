@@ -1,21 +1,119 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { gsap } from 'gsap'
 
 export const ContactUs = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [sent, setSent] = useState(false);
+  const [sendStatus, setSendStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
+  const [animationFinished, setAnimationFinished] = useState(false);
   const buttonRef = useRef(null);
+  const formRef = useRef(null);
+  const finalizedRef = useRef(false);
+
+  // finalize UI when both animation and sending are complete
+  const finalizeSuccess = (button) => {
+    if (finalizedRef.current) return;
+    finalizedRef.current = true;
+    // keep the original final fade-in effect that was in the animation
+    setTimeout(() => {
+      if (button) button.removeAttribute('style');
+      gsap.fromTo(button, {
+        opacity: 0,
+        y: -8
+      }, {
+        opacity: 1,
+        y: 0,
+        clearProps: true,
+        duration: .3,
+        onComplete() {
+          if (button) button.classList.remove('active');
+          setLoading(false);
+          setSent(true);
+          setSendStatus('success');
+          // reset after a short while so user can send again
+          setTimeout(() => {
+            setSent(false);
+            setSendStatus('idle');
+            finalizedRef.current = false;
+          }, 3000);
+        }
+      })
+    }, 1800);
+  };
+
+  const finalizeError = (button, message = 'Failed to send message. Please try again.') => {
+    if (finalizedRef.current) return;
+    finalizedRef.current = true;
+    // small shake to indicate failure then reset
+    gsap.to(button, {
+      x: -8,
+      duration: .06,
+      yoyo: true,
+      repeat: 3,
+      onComplete() {
+        if (button) button.classList.remove('active');
+        setLoading(false);
+        setError(message);
+        setSendStatus('error');
+        setTimeout(() => {
+          setError('');
+          setSendStatus('idle');
+          finalizedRef.current = false;
+        }, 3000);
+      }
+    })
+  };
+
+  const handleAnimationComplete = (button) => {
+    setAnimationFinished(true);
+    if (sendStatus === 'success') {
+      finalizeSuccess(button);
+    } else if (sendStatus === 'error') {
+      finalizeError(button);
+    }
+  };
+
+  const sendRequest = async (formData) => {
+    // use formData so it's not unused; convert to a plain object for potential real requests
+    const payload = formData ? Object.fromEntries(formData.entries()) : null;
+    try {
+      // simulate network request
+      await new Promise((r) => setTimeout(r, 1000));
+      console.debug('Sending contact form', payload);
+      // simulate success (change to random or actual fetch if you have an API)
+      const ok = true;
+      if (ok) {
+        setSendStatus('success');
+        if (animationFinished) finalizeSuccess(buttonRef.current);
+      } else {
+        setSendStatus('error');
+        if (animationFinished) finalizeError(buttonRef.current, 'Server rejected the request.');
+      }
+    } catch (err) {
+      setSendStatus('error');
+      if (animationFinished) finalizeError(buttonRef.current, err.message || 'Network error');
+    }
+  };
 
   const handleClick = () => {
     const button = buttonRef.current;
     if (!button || button.classList.contains('active')) return;
+    if (sendStatus === 'sending') return;
 
     const getVar = (variable) => getComputedStyle(button).getPropertyValue(variable);
 
     setLoading(true);
     setError('');
     setSent(false);
+    setSendStatus('sending');
+    setAnimationFinished(false);
+    finalizedRef.current = false;
+
+    // start sending in background
+    const formEl = formRef.current;
+    const formData = formEl ? new FormData(formEl) : null;
+    sendRequest(formData);
 
     button.classList.add('active');
 
@@ -74,23 +172,8 @@ export const ContactUs = () => {
         '--plane-opacity': 0,
         duration: .375,
         onComplete() {
-          setTimeout(() => {
-            button.removeAttribute('style');
-            gsap.fromTo(button, {
-              opacity: 0,
-              y: -8
-            }, {
-              opacity: 1,
-              y: 0,
-              clearProps: true,
-              duration: .3,
-              onComplete() {
-                button.classList.remove('active');
-                setLoading(false);
-                setSent(true);
-              }
-            })
-          }, 1800)
+          // wait until animation end; finalize logic will check send status
+          handleAnimationComplete(button);
         }
       }]
     })
@@ -126,17 +209,6 @@ export const ContactUs = () => {
       }]
     })
   };
-
-  useEffect(() => {
-    const button = buttonRef.current;
-    if (!button) return;
-
-    button.addEventListener('click', handleClick);
-
-    return () => {
-      button.removeEventListener('click', handleClick);
-    };
-  }, []);
 
   return (
     <>
@@ -387,7 +459,7 @@ export const ContactUs = () => {
           <div className="col-lg-10">
             <div className="contact-form-wrapper">
               <h2 className="text-center mb-4">Get in Touch</h2>
-              <form action="" method="post" className="email-form">
+              <form action="" method="post" className="email-form" ref={formRef} onSubmit={(e) => e.preventDefault()}>
                 <div className="row g-3">
                   <div className="col-md-6">
                     <div className="form-group">
@@ -423,12 +495,12 @@ export const ContactUs = () => {
                     </div>
                   </div>
                   <div className="col-12">
-                    <div className={`loading ${loading ? 'd-block' : ''}`}>Loading</div>
-                    <div className={`error-message ${error ? 'd-block' : ''}`}>{error}</div>
-                    <div className={`sent-message ${sent ? 'd-block' : ''}`}>Your message has been sent. Thank you!</div>
+                    <div className={`loading ${loading ? 'd-block' : ''}`} aria-hidden={!loading}>Loading</div>
+                    <div className={`error-message ${error ? 'd-block' : ''}`} role="status" aria-live="polite">{error}</div>
+                    <div className={`sent-message ${sent ? 'd-block' : ''}`} role="status" aria-live="polite">Your message has been sent. Thank you!</div>
                   </div>
                   <div className="col-12 text-center">
-                    <button type="button" className="button" ref={buttonRef}>
+                    <button type="button" className="button" ref={buttonRef} onClick={handleClick}>
                       <span className="default">Send Message</span>
                       <span className="success">
                         <svg viewBox="0 0 16 16">
