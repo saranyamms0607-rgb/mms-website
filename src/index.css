@@ -81,11 +81,11 @@ a:hover {
 
 /* Remove the old header styles */
 .site-header {
-  background: linear-gradient(
+  /* background: linear-gradient(
     135deg,
     rgba(83, 19, 27, 0.95),
     rgba(83, 19, 27, 0.98)
-  ) !important;
+  ) !important; */
   backdrop-filter: blur(12px) !important;
   border: 1px solid rgba(255, 231, 169, 0.12) !important;
   position: fixed !important;
@@ -94,7 +94,7 @@ a:hover {
   transform: translateX(-50%) !important;
   width: calc(100% - 24px) !important;
   max-width: 1200px !important;
-  border-radius: 36px !important;
+  /* border-radius: 36px !important; */
 }
 
 /* Avoid sections being hidden under the sticky header when scrolled into view */
