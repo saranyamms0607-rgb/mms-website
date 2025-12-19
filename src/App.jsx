@@ -10,6 +10,8 @@ import { Home } from './Taps/Home'
 import { Studio } from './Taps/Studio'
 import { Root } from './components/Root'
 import { ContactUs } from './Taps/ContactUs'
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
 
 function App() {
   const [active, setActive] = useState('home')
