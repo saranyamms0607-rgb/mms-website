@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import logo from "../assets/mediamatic-logo.png";
-import "./header.css";
-
+import "../styles/Header.css";
 export const Header = () => {
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);

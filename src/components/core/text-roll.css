@@ -1,0 +1,23 @@
+.text-roll {
+  display: inline-block;
+  line-height: 1;
+  white-space: pre;
+}
+
+.text-roll-letter {
+  display: inline-block;
+  transform: translateY(1rem);
+  opacity: 0;
+  animation: textRollIn 0.6s cubic-bezier(.22,.9,.35,1) forwards;
+}
+
+@keyframes textRollIn {
+  from {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
