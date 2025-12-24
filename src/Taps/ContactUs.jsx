@@ -448,12 +448,7 @@ export const ContactUs = () => {
           </div>
         </div>
       </div>
-      <div className="map-section" data-aos="fade-up" data-aos-delay="200">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.883535925273!2d77.04237169999999!3d11.047357800000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba859e917e14165%3A0x862614d85d3a08f9!2sMediamatic%20Studio%20-%20Complete%20Digital%20Solution!5e0!3m2!1sen!2sin!4v1756126340458!5m2!1sen!2sin"
-          width="100%" height="500" style={{border: 0}} allowFullScreen="" loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"></iframe>
-      </div>
+
       <div className="container form-container-overlap">
         <div className="row justify-content-center" data-aos="fade-up" data-aos-delay="300">
           <div className="col-lg-10">

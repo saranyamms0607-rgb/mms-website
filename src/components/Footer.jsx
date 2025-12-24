@@ -1,21 +1,45 @@
 import React from "react";
 import "../styles/Footer.css";
+
 export const Footer = () => {
   return (
     <footer className="footer">
       
       {/* LEFT SIDE – SOCIAL ICONS */}
       <div className="footer-social">
-        <a href="#" aria-label="X">
+        <a
+          href="https://x.com/_media_matic"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="X"
+        >
           <i className="fa-brands fa-x-twitter"></i>
         </a>
-        <a href="#" aria-label="Facebook">
+
+        <a
+          href="https://www.facebook.com/mediamatic.studio1"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook"
+        >
           <i className="fa-brands fa-facebook-f"></i>
         </a>
-        <a href="#" aria-label="Instagram">
+
+        <a
+          href="https://www.instagram.com/mediamaticstudio/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+        >
           <i className="fa-brands fa-instagram"></i>
         </a>
-        <a href="#" aria-label="LinkedIn">
+
+        <a
+          href="https://www.linkedin.com/in/reshma-s-1b7218276/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+        >
           <i className="fa-brands fa-linkedin-in"></i>
         </a>
       </div>

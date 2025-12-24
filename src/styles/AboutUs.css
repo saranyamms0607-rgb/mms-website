@@ -1,31 +1,43 @@
-.about-section {
-  position: relative;
-  min-height: 100vh;
-  padding: 100px 6vw;
-  overflow: hidden;
+/* SECTION SETUP */
+.about-section { 
+  background: #efefef; 
+  min-height: 100vh; 
+  position: relative; 
+  overflow: hidden; 
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  color: #1a1a1a;
 }
 
-/* VIDEO */
-.video-wrapper {
-  position: fixed;
-  background: #000;
-  overflow: hidden;
-  z-index: 10;
+/* VIDEO "BUS" */
+.video-wrapper { 
+  position: fixed; 
+  z-index: 100; 
+  background: #000; 
+  overflow: hidden; 
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
 }
 
-.scroll-video {
+.scroll-video { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+}
+
+/* CONTENT CONTAINER */
+.content-container { 
+  position: absolute;
+  top: 80vh; /* Matches the video's starting meeting point */
+  padding: 0 6vw 100px 6vw;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* TEXT CONTAINER */
-.content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-top: 120px;
+  z-index: 50;
   display: flex;
   flex-direction: column;
+}
+
+/* TEXT ALIGNMENT (The "Meeting Lane") */
+.text-wrapper {
+  margin-left: 420px; /* Creates space for the 380px video + gap */
+  max-width: 900px;
 }
 
 /* EYEBROW */
@@ -33,39 +45,116 @@
   font-size: 13px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  margin-bottom: 32px;
-  color: #111;
+  margin-bottom: 24px;
+  color: #555;
+  display: block;
 }
 
-/* EDITORIAL HEADLINE */
-.big-text {
-  font-size: clamp(2.8rem, 5vw, 4.8rem);
-  font-weight: 500;
-  line-height: 1.12;
+/* HEADLINE & LETTERS */
+.headline { 
+  font-size: clamp(2.2rem, 4.5vw, 4.8rem); 
+  line-height: 1.1; 
+  font-weight: 600; 
   color: #111;
-  max-width: 1000px;
+  margin: 0 0 40px 0;
 }
 
-.big-text strong {
+.letter {
+  display: inline-block;
+  white-space: pre; /* Prevents vertical stacking of letters */
+}
+
+/* DETAILED CONTENT BLOCKS */
+.detail-block {
+  margin-top: 60px;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  padding-top: 40px;
+}
+
+.legacy-paragraph {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 40px;
+}
+
+/* MISSION & VISION GRID */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.info-grid h2 {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #111;
+  display: inline-block;
+}
+
+.list-item {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  padding-left: 15px;
+  position: relative;
+}
+
+.list-item::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: #555;
+}
+
+/* STRATEGY STEPS */
+.strategy-container {
+  margin-top: 40px;
+}
+
+.strategy-step {
+  margin-bottom: 30px;
+  padding: 25px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 12px;
+  transition: background 0.3s ease;
+}
+
+.strategy-step:hover {
+  background: #ffffff;
+}
+
+.step-number {
+  font-weight: 800;
+  color: #111;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.step-title {
+  font-size: 1.4rem;
   font-weight: 700;
+  margin-bottom: 12px;
+  display: block;
 }
 
-/* MOBILE */
-@media (max-width: 768px) {
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 1024px) {
+  .text-wrapper {
+    margin-left: 0;
+    margin-top: 320px; /* Space for the video on top */
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
   .video-wrapper {
-    position: relative !important;
-    width: 100% !important;
-    height: 240px !important;
-    top: 0 !important;
-    left: 0 !important;
-    border-radius: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%);
   }
-
-  .content {
-    padding: 40px 20px;
-  }
-
-  /* .big-text {
-    font-size: 2rem;
-  } */
 }
